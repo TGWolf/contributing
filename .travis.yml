@@ -1,0 +1,29 @@
+matrix:
+  include:
+  - language: bash
+    name: "Shellcheck (Bash)"
+    os: linux
+    before_install:
+      - mkdir travis
+      - git clone https://github.com/TravisToolbox/shellcheck-travis.git travis/shellcheck
+    install:
+      - ./travis/shellcheck/install.sh
+    script:
+      - ./travis/shellcheck/scan.sh
+  - language: ruby
+    name: Link Checking (rvm 2.7)
+    rvm: 2.7
+    env:
+    - WHITELIST="https://img.shields.io"
+    - EXCLUDE_FILES="CHANGELOG.md"
+    before_install:
+    - mkdir travis
+    - git clone https://github.com/TravisToolbox/awesomebot-travis.git travis/awesomebot
+    install:
+    - "./travis/awesomebot/install.sh"
+    script:
+    - "./travis/awesomebot/scan.sh"
+notifications:
+  email: false
+  slack:
+    secure: RcUO3a4suSelteXWwMjifz98QGutKOKBLLjWf+aFXeRw8kLusMAEIyoghdfeZk016+nvruqunL8SoVI6qlW/6o3FtiqK3XMM3UrYsKI/0tU+EcYuxh1nmVsp6r0Em/Th9QWyeIKz2IzlF3D8atnxIKticAJUuppg5ghx42vU50wAtALbU9sfMdpo5hBl0vCDsB4cqEZemnMbEowCvQf4r7LkSo9aYfrc74TTAl4mGzU6em8lSpLF3pAYusDM/IP8HqcIJ+tHkIDhh8+NeTvMI8Z/kZZI8YWncqmwIRbKe7v9GnEZPiafaqV42EddbyZ4sljTSF05VbSu2RJ78YPZ5F7iIQtA9E9TAbHasBhkARtwDiVpxB91SExR6FoANSHeJMnT2TTS3/UhquEuxjkzzucsFvGcSHo8IJoL86ntBb7N8CPgSmY5b4U6SHJ8Mf3WRz3yexSafUDS0T+Q+bH7+aoDYeuIhtg1Qhbxisj7OHrvqUbFyfA/W9kP56kq/vlk8g4GU1TS8mbSAD5wmRzdKwk74aBxPBSVrB8NZ0ncUGFMhzp8QpaLgVsg8lvCATdDz9t+1MPFus3Peaq7D+Bfyq8JBSFV9mIWCUcl5clPBjOzNMFPbt8e+l0jmVVTrR/QuZaJPMwdUPwFHxiptkOWCxrlLTqIwHEy8f0zhxzvBYw=
